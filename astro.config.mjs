@@ -4,8 +4,8 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://apcamargo.github.io",
-  base: "/starlight-test",
+  site: "https://apcamargo.github.io/starlight-test",
+  base: "starlight-test",
   integrations: [
     starlight({
       title: "My Docs",
