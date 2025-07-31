@@ -30,7 +30,7 @@ export default defineConfig({
         },
       ],
       customCss: [
-        "@fontsource-variable/inter/opsz-italic.css",
+        "@fontsource-variable/inter",
         "./src/styles/custom.css"
       ],
     }),
