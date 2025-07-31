@@ -29,6 +29,7 @@ export default defineConfig({
           autogenerate: { directory: "reference" },
         },
       ],
+      customCss: ["@fontsource-variable/inter/opsz-italic.css"],
     }),
   ],
 });
