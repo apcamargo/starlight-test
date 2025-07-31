@@ -32,6 +32,7 @@ export default defineConfig({
       customCss: [
         "@fontsource-variable/inter",
         "@fontsource-variable/inter/opsz-italic.css",
+        "@fontsource-variable/jetbrains-mono",
         "./src/styles/custom.css"
       ],
     }),
