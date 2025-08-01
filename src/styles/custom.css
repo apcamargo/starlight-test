@@ -6,4 +6,11 @@
 /* Make splash page title use monospace font */
 h1[data-page-title] {
     font-family: var(--sl-font-mono);
+    font-weight: 700;
+}
+
+/* Make navbar title use monospace font */
+.site-title span {
+    font-family: var(--sl-font-mono);
+    font-weight: 700;
 }

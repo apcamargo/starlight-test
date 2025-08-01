@@ -8,7 +8,7 @@ export default defineConfig({
   base: "/starlight-test",
   integrations: [
     starlight({
-      title: "My Docs",
+      title: "CATG",
       social: [
         {
           icon: "github",
