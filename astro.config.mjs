@@ -33,7 +33,6 @@ export default defineConfig({
         "@fontsource-variable/inter",
         "@fontsource-variable/inter/opsz-italic.css",
         "@fontsource-variable/jetbrains-mono",
-        "@fontsource-variable/roboto-flex/full.css",
         "./src/styles/custom.css"
       ],
     }),
