@@ -2,3 +2,8 @@
   --sl-font: "Inter Variable", -apple-system, BlinkMacSystemFont, sans-serif;
   --sl-font-mono: "JetBrains Mono Variable", monospace;
 }
+
+/* Make splash page title use monospace font */
+h1[data-page-title] {
+    font-family: var(--sl-font-mono);
+}
