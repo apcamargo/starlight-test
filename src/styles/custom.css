@@ -17,7 +17,12 @@ h1[data-page-title] {
     letter-spacing: 0.1em;
 }
 
-/* Hide navbar title on splash page */
+/* Hide navbar title on the splash page */
 [data-has-hero] .site-title span {
     display: none;
+}
+
+/* Remove the navbar background color on the splash page */
+[data-has-hero] .header span {
+    background-color: transparent;
 }
