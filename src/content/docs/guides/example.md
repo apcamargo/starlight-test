@@ -6,12 +6,37 @@ description: A guide in my new Starlight docs site.
 Guides lead a *user* through a specific task they want to accomplish, often with a sequence of steps.
 Writing a good guide requires thinking about what your users are trying to do.
 
-## Example code
+## Pixi
 
-```py
-for i in range(10):
-    print(i)
+[Pixi](https://pixi.sh/) is a package manager to install packages from the Conda ecosystem.
+
+### Installing Pixi
+
+To install Pixi run the following command in your terminal:
+
+```sh
+curl -fsSL https://pixi.sh/install.sh | bash
 ```
+
+By default, Pixi retrieves packages only from [conda-forge](https://conda-forge.org/). However, since most bioinformatics software is available on [Bioconda](https://bioconda.github.io/), we will add it as an additional repository:
+
+```sh
+pixi config append default-channels conda-forge
+pixi config append default-channels bioconda
+```
+
+### Installing global tools
+
+Pixi allows you to install software globally, eliminating the need to create and activate environments. Since Pixi isolates each tool from the rest, you don't need to worry about potentially conflicting dependencies.
+
+For example, if you want to install [SeqKit](https://github.com/shenwei356/seqkit) you can run:
+
+```sh
+pixi global install seqkit
+```
+
+After installation, the `seqkit` command will be available to you.
+
 
 ## Further reading
 
