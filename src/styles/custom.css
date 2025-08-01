@@ -1,6 +1,7 @@
+/* Set the default fonts for the site */
 :root {
-  --sl-font: "Inter Variable", -apple-system, BlinkMacSystemFont, sans-serif;
-  --sl-font-mono: "JetBrains Mono Variable", monospace;
+    --sl-font: "Inter Variable", -apple-system, BlinkMacSystemFont, sans-serif;
+    --sl-font-mono: "JetBrains Mono Variable", monospace;
 }
 
 /* Make splash page title use monospace font */
@@ -12,5 +13,11 @@ h1[data-page-title] {
 /* Make navbar title use monospace font */
 .site-title span {
     font-family: var(--sl-font-mono);
-    font-weight: 700;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+}
+
+/* Hide navbar title on splash page */
+[data-page-template="splash"] .site-title span {
+    display: none;
 }

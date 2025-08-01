@@ -33,7 +33,7 @@ export default defineConfig({
         "@fontsource-variable/inter",
         "@fontsource-variable/inter/wght-italic.css",
         "@fontsource-variable/jetbrains-mono",
-        "./src/styles/custom.css"
+        "./src/styles/custom.css",
       ],
     }),
   ],
