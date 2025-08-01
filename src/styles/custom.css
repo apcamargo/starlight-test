@@ -1,4 +1,4 @@
 @theme {
-  --sl-font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, sans-serif;
+  --sl-font: "Inter Variable", -apple-system, BlinkMacSystemFont, sans-serif;
   --sl-font-mono: "JetBrains Mono Variable", monospace;
 }
