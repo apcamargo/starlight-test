@@ -18,6 +18,7 @@ code {
 h1[data-page-title] {
     font-family: var(--sl-font-mono);
     font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 /* Make navbar title use monospace font */
