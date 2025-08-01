@@ -1,4 +1,6 @@
-:root {
-  --sl-font: "Inter Variable", sans-serif;
-  --sl-font-mono: "JetBrains Mono Variable", monospace;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Variable", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace;
 }
