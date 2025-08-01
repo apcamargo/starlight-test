@@ -11,7 +11,7 @@ code {
 
 /* Add border radius to card elements */
 .card {
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 /* Make splash page title use monospace font */
