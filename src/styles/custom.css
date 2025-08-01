@@ -9,6 +9,11 @@ code {
     border-radius: 4px;
 }
 
+/* Add border radius to card elements */
+.card {
+    border-radius: 8px;
+}
+
 /* Make splash page title use monospace font */
 h1[data-page-title] {
     font-family: var(--sl-font-mono);
