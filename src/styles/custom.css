@@ -4,6 +4,11 @@
     --sl-font-mono: "JetBrains Mono Variable", monospace;
 }
 
+/* Add border radius to code elements */
+code {
+    border-radius: 4px;
+}
+
 /* Make splash page title use monospace font */
 h1[data-page-title] {
     font-family: var(--sl-font-mono);
