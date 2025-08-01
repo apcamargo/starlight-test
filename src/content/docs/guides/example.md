@@ -12,18 +12,23 @@ Writing a good guide requires thinking about what your users are trying to do.
 
 ### Installing Pixi
 
-To install Pixi run the following command in your terminal:
+{% steps %}
 
-```sh
-curl -fsSL https://pixi.sh/install.sh | bash
-```
 
-By default, Pixi retrieves packages only from [conda-forge](https://conda-forge.org/). However, since most bioinformatics software is available on [Bioconda](https://bioconda.github.io/), we will add it as an additional repository:
+1. To install Pixi run the following command in your terminal:
 
-```sh
-pixi config append default-channels conda-forge
-pixi config append default-channels bioconda
-```
+    ```sh
+    curl -fsSL https://pixi.sh/install.sh | bash
+    ```
+
+2. By default, Pixi retrieves packages only from [conda-forge](https://conda-forge.org/). However, since most bioinformatics software is available on [Bioconda](https://bioconda.github.io/), we will add it as an additional repository:
+
+    ```sh
+    pixi config append default-channels conda-forge
+    pixi config append default-channels bioconda
+    ```
+
+{% /steps %}
 
 ### Installing global tools
 
