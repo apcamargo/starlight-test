@@ -43,7 +43,7 @@ h1[data-page-title] {
 
 /* Remove the background color and border of the sidebar */
 .sidebar-pane {
-    background-color: transparent;
+    background-color: var(--sl-color-bg);
     border-inline-end: none;
 }
 
