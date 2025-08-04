@@ -35,6 +35,12 @@ export default defineConfig({
         "@fontsource-variable/jetbrains-mono",
         "./src/styles/custom.css",
       ],
+      // Set Portuguese as default language for this site
+      defaultLocale: 'pt-br',
+      locales: {
+        pt-br: { label: 'Português', }
+        en:    { label: 'English', }
+      },
     }),
   ],
 });
