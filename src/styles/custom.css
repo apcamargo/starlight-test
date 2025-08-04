@@ -42,12 +42,12 @@ h1[data-page-title] {
 }
 
 /* Remove the background color and border of the sidebar */
-.sidebar-pane {
+/* .sidebar-pane {
     background-color: transparent;
     border-inline-end: none;
-}
+} */
 
 /* Remove the border of the right sidebar */
-.right-sidebar {
+/* .right-sidebar {
     border-inline-start: none;
-}
+} */
