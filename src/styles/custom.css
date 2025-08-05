@@ -51,3 +51,9 @@ h1[data-page-title] {
 .right-sidebar {
     border-inline-start: none;
 }
+
+/* Customise the font of the titles of pagination links */
+footer .pagination-links .link-title {
+  font-size: inherit; /* use the same font size as body */
+  font-weight: bold;  /* make it bold */
+}
