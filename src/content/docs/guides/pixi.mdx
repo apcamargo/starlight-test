@@ -1,16 +1,10 @@
 ---
-title: Example Guide
-description: A guide in my new Starlight docs site.
+title: Pixi
 ---
-
-Guides lead a *user* through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
-
-## Pixi
 
 [Pixi](https://pixi.sh/) is a package manager to install packages from the Conda ecosystem.
 
-### Installing Pixi
+## Installation
 
 import { Steps } from '@astrojs/starlight/components';
 
@@ -31,7 +25,7 @@ import { Steps } from '@astrojs/starlight/components';
 
 </Steps>
 
-### Installing global tools
+## Installing global tools
 
 Pixi allows you to install software globally, eliminating the need to create and activate environments. Since Pixi isolates each tool from the rest, you don't need to worry about potentially conflicting dependencies.
 
@@ -43,6 +37,6 @@ pixi global install seqkit
 
 After installation, the `seqkit` command will be available to you.
 
-## Further reading
-
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+```sh
+seqkit --help
+```
