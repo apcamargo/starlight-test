@@ -50,7 +50,7 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /\([^()]+\)/
+```sh /<\([^()]+\)/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
@@ -60,16 +60,18 @@ diff <(ls dir1) <(ls dir2)
 
 ```mermaid
 graph LR
-    subgraph " "
-        CMD1["Command 1"]
-        CMD2["Command 2"]
-    end
-    
+    CMD1["Command 1"]
+    STDOUT["stdout(1)"]
+    STDIN["stdin(0)"]
+    CMD2["Command 2"]
+    STDERR["stderr(2)"]
     TERM["Terminal"]
     
-    CMD1 -.->|"fd 1 (stdout)"| CMD2
-    CMD1 -->|"fd 2 (stderr)"| TERM
-    CMD2 -.->|"fd 1 (stdout)"| TERM
+    CMD1 --> STDOUT
+    STDOUT -->|"pipe |"| STDIN
+    STDIN --> CMD2
+    CMD1 --> STDERR
+    STDERR --> TERM
 ```
 
 ### Common combinations
