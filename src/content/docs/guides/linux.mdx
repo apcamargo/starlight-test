@@ -25,14 +25,9 @@ flowchart LR
     
     subgraph PROGRAM ["Program/Process"]
         direction TB
-        STDIN[stdin 0] 
-        PROC[🖥️]
-        STDOUT[stdout 1]
-        STDERR[stderr 2]
-        
-        STDIN --> PROC
-        PROC --> STDOUT
-        PROC --> STDERR
+        STDIN[stdin 0] --> PROC[🖥️] 
+        PROC --> STDOUT[stdout 1]
+        PROC --> STDERR[stderr 2]
     end
     
     subgraph OUTPUT ["Data Destinations"]
