@@ -4,12 +4,35 @@ title: Linux
 
 ## Piping and redirecting
 
+Piping and redirecting are fundamental concepts in Linux that allow you to control how data flows between commands and files. They make the command line incredibly powerful by enabling you to chain commands together and manage input/output streams.
+
+### Standard streams
+
+Before diving in, understand the three standard streams:
+
+- **stdin:** Data flows *into* a program.
+- **stdout:** Data flows *out of* a program.
+- **stderr:** Error messages flow *out of* a program separately.
+
 ### Piping
 
-Sends the output of one command as input to another command.
+The pipe operator `|` connects the stdout of one command to the stdin of another command.
 
 ```sh "|" title="Counting entries in a FASTA file"
 awk '/^>/' genome.fasta | wc -l
+```
+
+```sh "|"
+# ls writes to stdout → grep reads from stdin
+ls -la | grep ".txt"
+
+# cat writes file content to stdout → wc reads from stdin
+cat file.txt | wc -l
+
+# Multiple pipes create a pipeline
+ps aux | grep firefox | awk '{print $2}'
+#      ↑              ↑
+#     stdout→stdin   stdout→stdin
 ```
 
 ### Output redirection
@@ -20,12 +43,23 @@ awk '/^>/' genome.fasta | wc -l
 | `>>` | Redirect output to file (append) | `echo "World" >> file.txt` |
 | `2>` | Redirect errors to file | `command 2> errors.log` |
 | `&>` | Redirect both output and errors | `command &> all.log` |
+| `2>&1` | Merge error stream (stderr → stdout) | `command > /dev/null 2>&1` |
 
 ### Input redirection
 
 | Operator | Description | Example |
 |----------|-------------|---------|
 | `<` | Read input from file | `sort < names.txt` |
+
+### Process substitution
+
+```sh "<(.+?)"
+# Treat command output as a file for stdin
+diff <(ls dir1) <(ls dir2)
+#     ↑          ↑
+# stdout→temp   stdout→temp
+# Both temps become stdin for diff
+```
 
 ### Common combinations
 
