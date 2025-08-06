@@ -16,7 +16,8 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 
 ```mermaid
 flowchart LR
-    subgraph INPUT ["Input"]
+    subgraph INPUT ["Data sources"]
+        direction TB
         KB[Keyboard]
         FILE[Files]
         PIPE[Pipes]
@@ -28,6 +29,7 @@ flowchart LR
     end
     
     subgraph OUTPUT ["Output"]
+        direction TB
         TERM[Terminal]
         OUTFILE[Files]
         NEXTPROG[Pipes]
@@ -92,7 +94,7 @@ find . -name "*.log" 2> /dev/null
 
 ### Process substitution
 
-```sh /<\([^)]*\)\)/
+```sh /\<\x28[^\x29]*\x29/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
