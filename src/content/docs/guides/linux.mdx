@@ -1,0 +1,37 @@
+---
+title: Linux
+---
+
+## Piping and redirecting
+
+### Piping
+
+Sends the output of one command as input to another command.
+
+```sh "|" title="Counting entries in a FASTA file"
+awk '/^>/' genome.fasta | wc -l
+```
+
+### Output redirection
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `>` | Redirect output to file (overwrite) | `echo "Hello" > file.txt` |
+| `>>` | Redirect output to file (append) | `echo "World" >> file.txt` |
+| `2>` | Redirect errors to file | `command 2> errors.log` |
+| `&>` | Redirect both output and errors | `command &> all.log` |
+
+### Input redirection
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `<` | Read input from file | `sort < names.txt` |
+| `<<` | Here document (multi-line input) | `cat << EOF`<br>`line1`<br>`line2`<br>`EOF` |
+
+### Common combinations
+
+```sh
+cat file.txt | sort | uniq > sorted.txt
+command 2>&1 | tee output.log
+find . -name "*.log" 2>/dev/null
+```
