@@ -50,7 +50,7 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /<\((?:[^)]*)\)/g
+```sh /<\(([^)]*)\)/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
@@ -64,9 +64,9 @@ graph LR
     CMD2("Command 2")
     TERM("Terminal")
     
-    CMD1 -->|"stdout(1)"| PIPE("|")
-    PIPE -->|"stdin(0)"| CMD2
-    CMD1 -->|"stderr(2)"| TERM
+    CMD1 -->|"stdout"| PIPE("|")
+    PIPE -->|"stdin"| CMD2
+    CMD1 -->|"stderr"| TERM
 ```
 
 ### Common combinations
