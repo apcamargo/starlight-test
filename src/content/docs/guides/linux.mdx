@@ -50,7 +50,7 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /<([^()]+)/
+```sh /([^()]+)/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
@@ -61,20 +61,20 @@ diff <(ls dir1) <(ls dir2)
 ```mermaid
 graph TD
     subgraph "Process/Command"
-        PROC[["🖥️ Process<br/>(e.g., ls, grep, cat)"]]
+        PROC[["🖥️ Process (e.g., ls, grep, cat)"]]
     end
     
     subgraph "Input Sources"
-        KB[["⌨️ Keyboard<br/>(default)"]]
-        FILE_IN[["📄 Input File<br/>(via <)"]]
-        PIPE_IN[["📊 Previous Command<br/>(via |)"]]
+        KB[["⌨️ Keyboard (default)"]]
+        FILE_IN[["📄 Input File (via <)"]]
+        PIPE_IN[["📊 Previous Command (via |)"]]
     end
     
     subgraph "Output Destinations"
-        SCREEN[["🖵 Terminal Screen<br/>(default)"]]
-        FILE_OUT[["📄 Output File<br/>(via >)"]]
-        PIPE_OUT[["📊 Next Command<br/>(via |)"]]
-        NULL[["🕳️ /dev/null<br/>(discard)"]]
+        SCREEN[["🖵 Terminal Screen (default)"]]
+        FILE_OUT[["📄 Output File (via >)"]]
+        PIPE_OUT[["📊 Next Command (via |)"]]
+        NULL[["🕳️ /dev/null (discard)"]]
     end
     
     %% stdin connections
@@ -98,18 +98,9 @@ graph TD
     STDERR -->|"2> /dev/null"| NULL
     
     %% Stream definitions
-    STDIN["📥 stdin<br/>(stream 0)"]
-    STDOUT["📤 stdout<br/>(stream 1)"]
-    STDERR["⚠️ stderr<br/>(stream 2)"]
-    
-    %% Styling
-    style PROC fill:#e1f5fe
-    style STDIN fill:#c8e6c9
-    style STDOUT fill:#fff9c4
-    style STDERR fill:#ffccbc
-    style KB fill:#f5f5f5
-    style SCREEN fill:#f5f5f5
-    style NULL fill:#424242,color:#fff
+    STDIN["📥 stdin (stream 0)"]
+    STDOUT["📤 stdout (stream 1)"]
+    STDERR["⚠️ stderr (stream 2)"]
 ```
 
 ### Common combinations
