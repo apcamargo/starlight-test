@@ -114,8 +114,8 @@ The `moreutils` package includes `sponge` along with several other handy command
 ### `/dev/stdin` and `/dev/stdout`
 
 `/dev/stdin` and `/dev/stdout` are special file paths that map directly to a process’s standard input and output streams. They allow you to treat these streams like regular files. These pseudo-files are particularly useful when working with programs that don't support piping directly. Instead of creating temporary files, you can:
-- Pass `/dev/stdin` to tools that require an input file path but need to read from a pipe
-- Use `/dev/stdout` when a program insists on writing to a file but you want the output displayed in the terminal or piped to another command
+- Pass `/dev/stdin` as a filename argument to programs that expect to read from a file, allowing them to read from piped input instead.
+- Use `/dev/stdout` as a filename argument when programs expect to write to a file, redirecting their output to the terminal or another piped command.
 
 One use case is [MUSCLE](https://github.com/rcedgar/muscle/), a tool for multiple sequence alignment that only accepts input and output as files. To make MUSCLE read from `stdin` and display the output in the terminal (`stdout`), you can run it like this:
 
