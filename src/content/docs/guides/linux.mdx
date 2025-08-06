@@ -111,6 +111,19 @@ The `moreutils` package includes `sponge` along with several other handy command
 | `2>&1` | Merge error stream (stderr → stdout) | `command > /dev/null 2>&1` |
 | `<` | Read input from file | `sort < names.txt` |
 
+### `/dev/stdin` and `/dev/stdout`
+
+`/dev/stdin` and `/dev/stdout` are special file paths that map directly to a process’s standard input and output streams. They allow you to treat these streams like regular files.
+
+```sh "/dev/stdin" "/dev/stdout"
+# Read from stdin as if it were a file
+cat file.txt | some_tool /dev/stdin
+
+some_tool input.txt > /dev/stdout
+```
+
+One common use case is working with programs that only accept file arguments. For example, if a tool cannot read from a pipe directly, you can pass `/dev/stdin` instead of an actual filename. Similarly, `/dev/stdout` can be used in scripts or pipelines when a file path is required but you want the output to go to the terminal or another command.
+
 ### Common combinations
 
 ```sh "|" ">" "2>" "2>&1"
@@ -122,9 +135,5 @@ find . -name "*.log" 2> /dev/null
 ### Process substitution
 
 ```sh /\<\x28[^\x29]*\x29/
-# Treat command output as a file for stdin
-diff <(ls dir1) <(ls dir2)
-#    ↑          ↑
-# stdout→temp   stdout→temp
-# Both temps become stdin for diff
+zet intersect <(echo -e "A\nB\nC") <(echo -e "B\nC\nD")
 ```
