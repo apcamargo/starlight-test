@@ -16,26 +16,15 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 
 ```mermaid
 flowchart LR
-    subgraph INPUT ["Data Sources"]
-        direction TB
-        KB[Keyboard]
-        FILE[Files]
-        PIPE[Other Programs]
-    end
+    INPUT ("Data sources")
     
     subgraph PROGRAM ["Program/Process"]
-        direction TB
         STDIN[stdin 0] --> PROC[🖥️] 
         PROC --> STDOUT[stdout 1]
         PROC --> STDERR[stderr 2]
     end
     
-    subgraph OUTPUT ["Data Destinations"]
-        direction TB
-        TERM[Terminal]
-        OUTFILE[Files]
-        NEXTPROG[Other Programs]
-    end
+    OUTPUT ["Data destinations"]
     
     INPUT -->|"Data flows IN"| STDIN
     STDOUT -->|"Normal output flows OUT"| OUTPUT
