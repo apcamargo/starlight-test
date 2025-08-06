@@ -22,9 +22,9 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 
 ### Standard streams
 
-- **stdin:** Data flows *into* a program.
-- **stdout:** Data flows *out of* a program.
-- **stderr:** Error messages flow *out of* a program separately.
+- `stdin`: Data flows *into* a program.
+- `stdout`: Data flows *out of* a program.
+- `stderr`: Error messages flow *out of* a program separately.
 
 ```mermaid
 graph LR
@@ -76,7 +76,7 @@ ps aux | grep firefox | awk '{print $2}'
 #     stdout→stdin   stdout→stdin
 ```
 
-#### The `sponge` command
+#### The `songe` command
 
 When you redirect output back to the same file you're reading from, the operation fails in an unexpected way. Consider this example where you want to sort sequences in a FASTA file by length using [SeqKit](https://bioinf.shenwei.me/seqkit) and save the result back to the same file:
 
@@ -113,16 +113,15 @@ The `moreutils` package includes `sponge` along with several other handy command
 
 ### `/dev/stdin` and `/dev/stdout`
 
-`/dev/stdin` and `/dev/stdout` are special file paths that map directly to a process’s standard input and output streams. They allow you to treat these streams like regular files.
+`/dev/stdin` and `/dev/stdout` are special file paths that map directly to a process’s standard input and output streams. They allow you to treat these streams like regular files. These pseudo-files are particularly useful when working with programs that don't support piping directly. Instead of creating temporary files, you can:
+- Pass `/dev/stdin` to tools that require an input file path but need to read from a pipe
+- Use `/dev/stdout` when a program insists on writing to a file but you want the output displayed in the terminal or piped to another command
+
+One use case is [MUSCLE](https://github.com/rcedgar/muscle/), a tool for multiple sequence alignment that only accepts input and output as files. To make MUSCLE read from `stdin` and display the output in the terminal (`stdout`), you can run it like this:
 
 ```sh "/dev/stdin" "/dev/stdout"
-# Read from stdin as if it were a file
-cat file.txt | some_tool /dev/stdin
-
-some_tool input.txt > /dev/stdout
+echo -e ">seq1\nMYYGR\n>seq2\nMRYR" | muscle -align /dev/stdin -output /dev/stdout
 ```
-
-One common use case is working with programs that only accept file arguments. For example, if a tool cannot read from a pipe directly, you can pass `/dev/stdin` instead of an actual filename. Similarly, `/dev/stdout` can be used in scripts or pipelines when a file path is required but you want the output to go to the terminal or another command.
 
 ### Common combinations
 
