@@ -35,7 +35,7 @@ ps aux | grep firefox | awk '{print $2}'
 #     stdout→stdin   stdout→stdin
 ```
 
-### Output redirection
+### Redirecting
 
 | Operator | Description | Example |
 |----------|-------------|---------|
@@ -44,16 +44,11 @@ ps aux | grep firefox | awk '{print $2}'
 | `2>` | Redirect errors to file | `command 2> errors.log` |
 | `&>` | Redirect both output and errors | `command &> all.log` |
 | `2>&1` | Merge error stream (stderr → stdout) | `command > /dev/null 2>&1` |
-
-### Input redirection
-
-| Operator | Description | Example |
-|----------|-------------|---------|
 | `<` | Read input from file | `sort < names.txt` |
 
 ### Process substitution
 
-```sh /<(.+)/
+```sh /<(.+?)/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
