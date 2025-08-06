@@ -4,6 +4,18 @@ title: Linux
 
 ## tmux
 
+## Running commands in parallel
+
+## Useful external tools
+
+- ripgrep
+- fd
+- zet
+- rush
+- xan
+
+## The Linux shell
+
 ## Piping and redirecting
 
 Piping and redirecting are fundamental concepts in Linux that allow you to control how data flows between commands and files. They make the command line incredibly powerful by enabling you to chain commands together and manage input/output streams.
@@ -82,6 +94,30 @@ cat file.txt | sort | uniq > sorted.txt
 command 2>&1 | tee output.log
 find . -name "*.log" 2> /dev/null
 ```
+
+### The `sponge` command
+
+When you redirect output back to the same file you're reading from, the operation fails in an unexpected way. Consider this example where you want to sort sequences in a FASTA file by length using [SeqKit](https://bioinf.shenwei.me/seqkit) and save the result back to the same file:
+
+```sh
+seqkit sort -l sequences.fasta > sequences.fasta
+```
+
+This command empties `file.txt` completely. The `>` operator clears the file to prepare for writing before `sort` gets a chance to read it, resulting in total data loss.
+
+The `sponge` command solves this problem by reading everything first, then writing to the file:
+
+```sh
+seqkit sort -l sequences.fasta | sponge sequences.fasta
+```
+
+Since `sponge` isn't included in standard Linux installations, you'll need to install it through the [`moreutils`](https://joeyh.name/code/moreutils/) package. Using [Pixi](../pixi/):
+
+```sh
+pixi global install moreutils
+```
+
+The `moreutils` package includes `sponge` along with several other handy command-line tools.
 
 ### Process substitution
 
