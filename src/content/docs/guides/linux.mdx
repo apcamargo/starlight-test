@@ -14,6 +14,33 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 - **stdout:** Data flows *out of* a program.
 - **stderr:** Error messages flow *out of* a program separately.
 
+```mermaid
+flowchart TB
+    subgraph INPUT ["Data Sources"]
+        KB[Keyboard]
+        FILE[Files]
+        PIPE[Other Programs]
+    end
+    
+    subgraph PROGRAM ["Program/Process"]
+        direction LR
+        STDIN[stdin 0] --> PROC[🖥️] 
+        PROC --> STDOUT[stdout 1]
+        PROC --> STDERR[stderr 2]
+    end
+    
+    subgraph OUTPUT ["Data Destinations"]
+        TERM[Terminal]
+        OUTFILE[Files]
+        NEXTPROG[Other Programs]
+    end
+    
+    INPUT -->|"Data flows IN"| STDIN
+    STDOUT -->|"Normal output flows OUT"| OUTPUT
+    STDERR -->|"Error messages flow OUT"| OUTPUT
+```
+
+
 ### Piping
 
 The pipe operator `|` connects the stdout of one command to the stdin of another command.
@@ -59,7 +86,7 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /<\([^)]*\)/g
+```sh /<\((?:[^)]*)\)/g
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
