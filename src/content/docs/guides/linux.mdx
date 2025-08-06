@@ -29,7 +29,7 @@ awk '/^>/' genome.fasta | wc -l
 
 ### Common combinations
 
-```sh
+```sh "|" ">" "2>" "2>&1"
 cat file.txt | sort | uniq > sorted.txt
 command 2>&1 | tee output.log
 find . -name "*.log" 2>/dev/null
