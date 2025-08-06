@@ -10,8 +10,6 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 
 ### Standard streams
 
-Before diving in, understand the three standard streams:
-
 - **stdin:** Data flows *into* a program.
 - **stdout:** Data flows *out of* a program.
 - **stderr:** Error messages flow *out of* a program separately.
@@ -19,6 +17,17 @@ Before diving in, understand the three standard streams:
 ### Piping
 
 The pipe operator `|` connects the stdout of one command to the stdin of another command.
+
+```mermaid
+graph LR
+    CMD1("Command 1")
+    CMD2("Command 2")
+    TERM("Terminal")
+    
+    CMD1 -->|"stdout"| PIPE("|")
+    PIPE -->|"stdin"| CMD2
+    CMD1 -->|"stderr"| TERM
+```
 
 ```sh "|" title="Counting entries in a FASTA file"
 awk '/^>/' genome.fasta | wc -l
@@ -50,23 +59,12 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /<\(([^)]*)\)/
+```sh /<\([^)]*\)/g
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
 # stdout→temp   stdout→temp
 # Both temps become stdin for diff
-```
-
-```mermaid
-graph LR
-    CMD1("Command 1")
-    CMD2("Command 2")
-    TERM("Terminal")
-    
-    CMD1 -->|"stdout"| PIPE("|")
-    PIPE -->|"stdin"| CMD2
-    CMD1 -->|"stderr"| TERM
 ```
 
 ### Common combinations
