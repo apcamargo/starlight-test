@@ -18,17 +18,17 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 graph LR
     INPUT["Data sources"]
     
-    subgraph PROGRAM["Program/Process"]
-        STDIN["stdin 0"] --> PROC["🖥️"] 
-        PROC --> STDOUT["stdout 1"]
-        PROC --> STDERR["stderr 2"]
+    subgraph PROGRAM["Process"]
+        STDIN["stdin"] --> PROC["🖥️"] 
+        PROC --> STDOUT["stdout"]
+        PROC --> STDERR["stderr"]
     end
     
     OUTPUT["Data destinations"]
     
-    INPUT -->|"Data flows IN"| STDIN
-    STDOUT -->|"Normal output flows OUT"| OUTPUT
-    STDERR -->|"Error messages flow OUT"| OUTPUT
+    INPUT --> STDIN
+    STDOUT --> OUTPUT
+    STDERR --> OUTPUT
 ```
 
 
