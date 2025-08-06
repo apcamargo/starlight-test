@@ -19,7 +19,12 @@ export default defineConfig({
       sidebar: [
         {
           label: "Guides",
-          autogenerate: { directory: "guides" },
+          items: [
+            // Each item here is one entry in the navigation menu.
+            { label: "Pixi", slug: "guides/pixi" },
+            { label: "Apptainer", slug: "guides/apptainer" },
+            { label: "Linux", slug: "guides/linux" },
+          ],
         },
         {
           label: "Reference",
