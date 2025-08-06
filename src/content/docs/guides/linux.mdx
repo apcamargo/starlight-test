@@ -76,26 +76,7 @@ ps aux | grep firefox | awk '{print $2}'
 #     stdout→stdin   stdout→stdin
 ```
 
-### Redirecting
-
-| Operator | Description | Example |
-|----------|-------------|---------|
-| `>` | Redirect output to file (overwrite) | `echo "Hello" > file.txt` |
-| `>>` | Redirect output to file (append) | `echo "World" >> file.txt` |
-| `2>` | Redirect errors to file | `command 2> errors.log` |
-| `&>` | Redirect both output and errors | `command &> all.log` |
-| `2>&1` | Merge error stream (stderr → stdout) | `command > /dev/null 2>&1` |
-| `<` | Read input from file | `sort < names.txt` |
-
-### Common combinations
-
-```sh "|" ">" "2>" "2>&1"
-cat file.txt | sort | uniq > sorted.txt
-command 2>&1 | tee output.log
-find . -name "*.log" 2> /dev/null
-```
-
-### The `sponge` command
+#### The `sponge` command
 
 When you redirect output back to the same file you're reading from, the operation fails in an unexpected way. Consider this example where you want to sort sequences in a FASTA file by length using [SeqKit](https://bioinf.shenwei.me/seqkit) and save the result back to the same file:
 
@@ -118,6 +99,25 @@ pixi global install moreutils
 ```
 
 The `moreutils` package includes `sponge` along with several other handy command-line tools.
+
+### Redirecting
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `>` | Redirect output to file (overwrite) | `echo "Hello" > file.txt` |
+| `>>` | Redirect output to file (append) | `echo "World" >> file.txt` |
+| `2>` | Redirect errors to file | `command 2> errors.log` |
+| `&>` | Redirect both output and errors | `command &> all.log` |
+| `2>&1` | Merge error stream (stderr → stdout) | `command > /dev/null 2>&1` |
+| `<` | Read input from file | `sort < names.txt` |
+
+### Common combinations
+
+```sh "|" ">" "2>" "2>&1"
+cat file.txt | sort | uniq > sorted.txt
+command 2>&1 | tee output.log
+find . -name "*.log" 2> /dev/null
+```
 
 ### Process substitution
 
