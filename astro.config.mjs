@@ -8,10 +8,7 @@ export default defineConfig({
   site: "https://apcamargo.github.io",
   base: "/starlight-test",
   integrations: [
-    mermaid({
-      theme: "base",
-      autoTheme: true
-    }),
+    mermaid(),
     starlight({
       title: "CATG",
       social: [
