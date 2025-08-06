@@ -15,16 +15,16 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 - **stderr:** Error messages flow *out of* a program separately.
 
 ```mermaid
-flowchart LR
-    INPUT ("Data sources")
+graph LR
+    INPUT["Data sources"]
     
-    subgraph PROGRAM ["Program/Process"]
-        STDIN[stdin 0] --> PROC[🖥️] 
-        PROC --> STDOUT[stdout 1]
-        PROC --> STDERR[stderr 2]
+    subgraph PROGRAM["Program/Process"]
+        STDIN["stdin 0"] --> PROC["🖥️"] 
+        PROC --> STDOUT["stdout 1"]
+        PROC --> STDERR["stderr 2"]
     end
     
-    OUTPUT ["Data destinations"]
+    OUTPUT["Data destinations"]
     
     INPUT -->|"Data flows IN"| STDIN
     STDOUT -->|"Normal output flows OUT"| OUTPUT
