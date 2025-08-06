@@ -53,12 +53,18 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /<(.+?)/
+```sh /<(.+)/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
 # stdout→temp   stdout→temp
 # Both temps become stdin for diff
+```
+
+```mermaid
+graph TD
+    A[Start] --> B[Process]
+    B --> C[End]
 ```
 
 ### Common combinations
