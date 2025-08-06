@@ -82,20 +82,20 @@ ps aux | grep firefox | awk '{print $2}'
 | `2>&1` | Merge error stream (stderr → stdout) | `command > /dev/null 2>&1` |
 | `<` | Read input from file | `sort < names.txt` |
 
-### Process substitution
-
-```sh /(<\([^)]*\))/
-# Treat command output as a file for stdin
-diff <(ls dir1) <(ls dir2)
-#     ↑          ↑
-# stdout→temp   stdout→temp
-# Both temps become stdin for diff
-```
-
 ### Common combinations
 
 ```sh "|" ">" "2>" "2>&1"
 cat file.txt | sort | uniq > sorted.txt
 command 2>&1 | tee output.log
 find . -name "*.log" 2> /dev/null
+```
+
+### Process substitution
+
+```sh /<\([^)]*\)\)/
+# Treat command output as a file for stdin
+diff <(ls dir1) <(ls dir2)
+#     ↑          ↑
+# stdout→temp   stdout→temp
+# Both temps become stdin for diff
 ```
