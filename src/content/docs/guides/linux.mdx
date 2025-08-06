@@ -50,7 +50,7 @@ ps aux | grep firefox | awk '{print $2}'
 
 ### Process substitution
 
-```sh /([^()]+)/
+```sh /\([^()]+\)/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
 #     ↑          ↑
@@ -59,48 +59,17 @@ diff <(ls dir1) <(ls dir2)
 ```
 
 ```mermaid
-graph TD
-    subgraph "Process/Command"
-        PROC[["🖥️ Process (e.g., ls, grep, cat)"]]
+graph LR
+    subgraph " "
+        CMD1["Command 1"]
+        CMD2["Command 2"]
     end
     
-    subgraph "Input Sources"
-        KB[["⌨️ Keyboard (default)"]]
-        FILE_IN[["📄 Input File (via <)"]]
-        PIPE_IN[["📊 Previous Command (via |)"]]
-    end
+    TERM["Terminal"]
     
-    subgraph "Output Destinations"
-        SCREEN[["🖵 Terminal Screen (default)"]]
-        FILE_OUT[["📄 Output File (via >)"]]
-        PIPE_OUT[["📊 Next Command (via |)"]]
-        NULL[["🕳️ /dev/null (discard)"]]
-    end
-    
-    %% stdin connections
-    KB -.->|"default"| STDIN
-    FILE_IN -->|"< redirect"| STDIN
-    PIPE_IN -->|"| pipe"| STDIN
-    STDIN -->|"fd 0"| PROC
-    
-    %% stdout connections
-    PROC -->|"fd 1"| STDOUT
-    STDOUT -.->|"default"| SCREEN
-    STDOUT -->|"> redirect"| FILE_OUT
-    STDOUT -->|"| pipe"| PIPE_OUT
-    STDOUT -->|"> /dev/null"| NULL
-    
-    %% stderr connections
-    PROC -->|"fd 2"| STDERR
-    STDERR -.->|"default"| SCREEN
-    STDERR -->|"2> redirect"| FILE_OUT
-    STDERR -->|"2>&1"| STDOUT
-    STDERR -->|"2> /dev/null"| NULL
-    
-    %% Stream definitions
-    STDIN["📥 stdin (stream 0)"]
-    STDOUT["📤 stdout (stream 1)"]
-    STDERR["⚠️ stderr (stream 2)"]
+    CMD1 -.->|"fd 1 (stdout)"| CMD2
+    CMD1 -->|"fd 2 (stderr)"| TERM
+    CMD2 -.->|"fd 1 (stdout)"| TERM
 ```
 
 ### Common combinations
