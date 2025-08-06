@@ -16,35 +16,35 @@ Piping and redirecting are fundamental concepts in Linux that allow you to contr
 
 ```mermaid
 flowchart LR
-    subgraph INPUT ["Input"]
+    subgraph INPUT ["Data Sources"]
         direction TB
         KB[Keyboard]
         FILE[Files]
-        PIPE[Pipes]
+        PIPE[Other Programs]
     end
     
-    subgraph PROGRAM ["Program"]
+    subgraph PROGRAM ["Program/Process"]
         direction TB
         STDIN[stdin 0] 
-        PROC[🖥️] 
+        PROC[🖥️]
         STDOUT[stdout 1]
         STDERR[stderr 2]
         
-        STDIN --> PROC 
+        STDIN --> PROC
         PROC --> STDOUT
         PROC --> STDERR
     end
     
-    subgraph OUTPUT ["Output"]
+    subgraph OUTPUT ["Data Destinations"]
         direction TB
         TERM[Terminal]
         OUTFILE[Files]
-        NEXTPROG[Pipes]
+        NEXTPROG[Other Programs]
     end
     
-    INPUT -->|"Data IN"| STDIN
-    STDOUT -->|"Normal OUT"| OUTPUT
-    STDERR -->|"Errors OUT"| OUTPUT
+    INPUT -->|"Data flows IN"| STDIN
+    STDOUT -->|"Normal output flows OUT"| OUTPUT
+    STDERR -->|"Error messages flow OUT"| OUTPUT
 ```
 
 
@@ -104,7 +104,7 @@ find . -name "*.log" 2> /dev/null
 ```sh /\<\x28[^\x29]*\x29/
 # Treat command output as a file for stdin
 diff <(ls dir1) <(ls dir2)
-#     ↑          ↑
+#    ↑          ↑
 # stdout→temp   stdout→temp
 # Both temps become stdin for diff
 ```
