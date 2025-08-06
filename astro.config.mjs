@@ -9,7 +9,7 @@ export default defineConfig({
   base: "/starlight-test",
   integrations: [
     mermaid({
-      theme: "default",
+      theme: "base",
       autoTheme: true
     }),
     starlight({
