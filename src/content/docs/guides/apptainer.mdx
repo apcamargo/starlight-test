@@ -11,3 +11,20 @@ This guide describes how to install Apptainer using Pixi. Before proceeding, ens
 ```sh
 pixi global install apptainer
 ```
+
+
+```sh
+mkdir $HOME/images
+apptainer pull $HOME/images/samtools.sif "docker://quay.io/biocontainers/samtools:1.22.1--h96c455f_0"
+apptainer --silent exec "$HOME/images/samtools.sif" samtools --help
+```
+
+```sh
+samtools() {
+    apptainer --silent exec "$HOME/images/samtools.sif" samtools "$@"
+}
+```
+
+```sh
+apptainer cache clean --force
+```
