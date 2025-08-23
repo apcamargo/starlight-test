@@ -19,8 +19,8 @@ import { Steps } from '@astrojs/starlight/components';
 2. By default, Pixi retrieves packages only from [conda-forge](https://conda-forge.org/). However, since most bioinformatics software is available on [Bioconda](https://bioconda.github.io/), we will add it as an additional repository:
 
     ```sh
-    pixi config append default-channels conda-forge
-    pixi config append default-channels bioconda
+    pixi config append --global default-channels conda-forge
+    pixi config append --global default-channels bioconda
     ```
 
 </Steps>
