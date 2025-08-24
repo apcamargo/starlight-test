@@ -26,6 +26,7 @@ export default defineConfig({
             { label: "Pixi", slug: "guides/pixi" },
             { label: "Apptainer", slug: "guides/apptainer" },
             { label: "Linux", slug: "guides/linux" },
+            { label: "Resources", slug: "guides/resources" },
           ],
         },
         {
