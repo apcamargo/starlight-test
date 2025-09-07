@@ -123,28 +123,22 @@ This guide will set up a command to run [InterProScan](https://interproscan-docs
     + }
     ```
 
-5. To execute an example, download the proteome of [*Promethearchaeum syntrophicum*](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/2594042/) from [UniProt](https://www.uniprot.org/proteomes/UP000321408) and annotate the proteins with Pfam, NCBIfam, and CDD:
+5. To annotate an example proteome, first download the proteome of [*Promethearchaeum syntrophicum*](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/2594042/) from [UniProt](https://www.uniprot.org/proteomes/UP000321408):
 
     ```sh
     wcurl --output UP000321408.faa "https://rest.uniprot.org/uniprotkb/stream?format=fasta&query=%28%28proteome%3AUP000321408%29%29"
     ```
 
-4. Run InterproScan:
+4. Run InterproScan to annotate the proteins with Pfam, NCBIfam, and CDD::
 
     ```sh 
-    mkdir output
-
-    singularity --silent exec \
-        -B $PWD/interproscan-5.75-106.0/data:/opt/interproscan/data \
-        $HOME/images/interproscan.sif \
-        /opt/interproscan/interproscan.sh \
-        --applications CDD,NCBIfam,Pfam \
-        --input proteins.faa \
-        --disable-precalc \
-        --output-dir output \
-        --tempdir temp \
-        --cpu 8
+    interproscan \
+      --applications Pfam,NCBIfam,CDD --iprlookup --goterms \
+      --output-dir interproscan_annotation --data-dir interproscan-5.75-106.0 \
+      --cpu 16 --input UP000321408.faa
     ```
+
+The [output files](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) containing the annotation results will be within `interproscan_annotation`.
 
 </Steps>
 
