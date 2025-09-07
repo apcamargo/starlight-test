@@ -16,24 +16,122 @@ pixi global install apptainer
 
 ## Example: `interproscan`
 
+This guide will set up a command to run [InterProScan](https://interproscan-docs.readthedocs.io/) version 5.75-106.0.
+
 <Steps>
 
-1. Pull the InterProScan image from [Docker Hub](https://hub.docker.com/r/interpro/interproscan):
+1. Create a directory within your `$HOME` to store [SIF images](https://github.com/apptainer/sif):
+
+    ```sh
+    mkdir -p $HOME/images
+    ```
+
+2. Pull the InterProScan image from [Docker Hub](https://hub.docker.com/r/interpro/interproscan):
 
     ```sh
     apptainer pull "$HOME/images/interproscan.sif" "docker://interpro/interproscan:5.75-106.0"
     ```
-
-2. Download and extract the InterProScan data:
+3. Download and extract the InterProScan data:
 
     ```sh
     wcurl "http://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/5.75-106.0/alt/interproscan-data-5.75-106.0.tar.gz"
     tar zxfv interproscan-data-5.75-106.0.tar.gz
     ```
 
-3. Run InterproScan:
+4. Add the function below to your `$HOME/.bashrc` file and source it to make it available in your current shell session:
+
+    ```diff lang="sh" title=".bashrc"
+    + interproscan() {
+    +     local output_dir=""
+    +     local data_dir=""
+    +     local i=1
+    + 
+    +     # If -help or --help is given, run interproscan.sh --help and exit
+    +     if [[ "\$1" == "-help" || "\$1" == "--help" ]]; then
+    +         singularity --silent exec \
+    +             "$HOME/images/interproscan.sif" \
+    +             /opt/interproscan/interproscan.sh --help
+    +         return 0
+    +     fi
+    + 
+    +     # Show usage if no arguments given
+    +     if [[ $# -eq 0 ]]; then
+    +         echo "Usage:"
+    +         echo "  interproscan --data-dir <path> [interproscan.sh arguments]"
+    +         echo
+    +         echo "Example:"
+    +         echo "  interproscan --data-dir /path/to/data --output-dir /path/to/output \\"
+    +         echo "               --applications Pfam,NCBIfam --disable-precalc \\"
+    +         echo "               --cpu 16 --input /path/to/input.faa"
+    +         echo
+    +         echo "Documentation for interproscan.sh:"
+    +         echo "  https://interproscan-docs.readthedocs.io/en/v5/HowToRun.html"
+    +         return 1
+    +     fi
+    +     
+    +     # Parse arguments to find output-dir and data-dir
+    +     while [[ $i -le $# ]]; do
+    +         if [[ "${!i}" == "--output-dir" ]] && [[ $((i+1)) -le $# ]]; then
+    +             ((i++))
+    +             output_dir="${!i}"
+    +         elif [[ "${!i}" == "--data-dir" ]] && [[ $((i+1)) -le $# ]]; then
+    +             ((i++))
+    +             data_dir="${!i}"
+    +         fi
+    +         ((i++))
+    +     done
+    + 
+    +     if [[ -z "$data_dir" ]]; then
+    +         echo "Error: --data-dir is required" >&2
+    +         return 1
+    +     fi
+    + 
+    +     # Check if output directory exists and is not empty
+    +     if [[ -d "$output_dir" ]] && [[ -n "$(ls -A "$output_dir" 2>/dev/null)" ]]; then
+    +         echo "Error: Output directory '$output_dir' is not empty" >&2
+    +         return 1
+    +     fi
+    + 
+    +     # Verify data directory exists
+    +     if [[ ! -d "$data_dir" ]]; then
+    +         echo "Error: Data directory '$data_dir' does not exist" >&2
+    +         return 1
+    +     fi
+    + 
+    +     # Create output directory
+    +     mkdir -p "$output_dir"
+    + 
+    +     # Filter out --data-dir from arguments since it's not passed to interproscan.sh
+    +     local args=()
+    +     i=1
+    +     while [[ $i -le $# ]]; do
+    +         if [[ "${!i}" == "--data-dir" ]]; then
+    +             ((i++))  # Skip the flag
+    +             ((i++))  # Skip the value
+    +         else
+    +             args+=("${!i}")
+    +             ((i++))
+    +         fi
+    +     done
+    + 
+    +     # Execute interproscan with proper mounts
+    +     singularity --silent exec \
+    +         -B "$data_dir/data:/opt/interproscan/data" \
+    +         "$HOME/images/interproscan.sif" \
+    +         /opt/interproscan/interproscan.sh \
+    +         "${args[@]}"
+    + }
+    ```
+
+5. To execute an example, download the proteome of [*Promethearchaeum syntrophicum*](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/2594042/) from [UniProt](https://www.uniprot.org/proteomes/UP000321408) and annotate the proteins with Pfam, NCBIfam, and CDD:
 
     ```sh
+    wcurl --output UP000321408.faa "https://rest.uniprot.org/uniprotkb/stream?format=fasta&query=%28%28proteome%3AUP000321408%29%29"
+    ```
+
+4. Run InterproScan:
+
+    ```sh 
     mkdir output
 
     singularity --silent exec \
