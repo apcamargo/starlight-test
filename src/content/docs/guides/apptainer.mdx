@@ -12,10 +12,44 @@ This guide describes how to install Apptainer using Pixi. Before proceeding, ens
 pixi global install apptainer
 ```
 
+## Example: ``
+
+<Steps>
+
+1. Pull the InterProScan image from [Docker Hub](https://hub.docker.com/r/interpro/interproscan):
+
+    ```sh
+    apptainer pull "$HOME/images/interproscan.sif" "docker://interpro/interproscan:5.75-106.0"
+    ```
+2. Download and extract the InterProScan data:
+
+    ```sh
+    wcurl "http://ftp.ebi.ac.uk/pub/software/unix/iprscan/5/5.75-106.0/alt/interproscan-data-5.75-106.0.tar.gz"
+    tar zxfv interproscan-data-5.75-106.0.tar.gz
+    ```
+
+3. Run InterproScan:
+
+    ```sh
+    mkdir output
+
+    singularity --silent exec \
+        -B $PWD/interproscan-5.75-106.0/data:/opt/interproscan/data \
+        $HOME/images/interproscan.sif \
+        /opt/interproscan/interproscan.sh \
+        --applications CDD,NCBIfam,Pfam \
+        --input proteins.faa \
+        --disable-precalc \
+        --output-dir output \
+        --tempdir temp \
+        --cpu 8
+    ```
+
+## Example: `samtools`
 
 ```sh
 mkdir $HOME/images
-apptainer pull $HOME/images/samtools.sif "docker://quay.io/biocontainers/samtools:1.22.1--h96c455f_0"
+apptainer pull "$HOME/images/samtools.sif" "docker://quay.io/biocontainers/samtools:1.22.1--h96c455f_0"
 apptainer --silent exec "$HOME/images/samtools.sif" samtools --help
 ```
 
