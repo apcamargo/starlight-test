@@ -3,20 +3,23 @@ title: Apptainer
 ---
 
 import { Steps } from '@astrojs/starlight/components';
+import { FileTree } from '@astrojs/starlight/components';
 
 [Apptainer](https://apptainer.org/) is a software for creating and running containers.
 
 ## Installation
 
-This guide describes how to install Apptainer using Pixi. Before proceeding, ensure that you have followed the [Pixi installation guide](../pixi/). Once Pixi is installed in your environment, you can install Apptainer globally by running:
+We will install Apptainer using [Pixi](https://pixi.sh/). Before proceeding, ensure that you have followed the [Pixi installation guide](../pixi/). Once Pixi is installed in your environment, you can install Apptainer globally by running:
 
 ```sh
 pixi global install apptainer
 ```
 
-## Example: `interproscan`
+## Example 1: InterProScan
 
-This guide will set up a command to run [InterProScan](https://interproscan-docs.readthedocs.io/) version 5.75-106.0.
+[InterProScan](https://interproscan-docs.readthedocs.io/) is a widely used tool for annotating protein sequences. It can classify sequences into families and predict the presence of domains, repeats, and functional sites. By integrating several analysis tools, InterProScan compares input sequences against reference entries from the [InterPro](https://www.ebi.ac.uk/interpro/) consortium’s member databases, providing comprehensive functional annotations in a single run.
+
+That said, installing InterProScan can be challenging due to its many dependencies, and recent versions are no longer available through Bioconda. Because of this, running it inside a container is a practical way to avoid installation issues and keep everything self-contained. This guide walks you through running InterProScan (version 5.75-106.0) locally with Apptainer, making it easier to set up and use.
 
 <Steps>
 
@@ -39,6 +42,14 @@ This guide will set up a command to run [InterProScan](https://interproscan-docs
     ```
 
 4. Add the function below to your `$HOME/.bashrc` file and source it to make it available in your current shell session:
+
+    <FileTree>
+
+    - $HOME
+        - .bashrc
+        - …
+
+    </FileTree>
 
     ```diff lang="sh" title=".bashrc"
     + interproscan() {
