@@ -161,11 +161,21 @@ This guide explains how to run InterProScan version 5.75‑106.0 locally using A
     ```sh 
     interproscan \
       --applications Pfam,NCBIfam,CDD --iprlookup --goterms --pathways \
-      --data-dir interproscan-5.75-106.0 --output-dir interproscan_annotation \
+      --data-dir interproscan-5.75-106.0 --output-dir UP000321408_interproscan \
       --cpu 16 --input UP000321408.faa
     ```
 
-    The [output files](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) containing the annotation results will be saved in the  `interproscan_annotation` directory.
+    The [output files](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) containing the annotation results will be saved in the  `UP000321408_interproscan` directory:
+
+    <FileTree>
+
+    - UP000321408_interproscan
+        - UP000321408.faa.gff3
+        - UP000321408.faa.json
+        - UP000321408.faa.tsv
+        - UP000321408.faa.xml
+
+    </FileTree>
 
 </Steps>
 
