@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import remarkCustomHeaderId from "remark-custom-header-id";
+import { remarkCustomHeaderId } from "remark-custom-header-id";
 import mermaid from "astro-mermaid";
 
 // https://astro.build/config

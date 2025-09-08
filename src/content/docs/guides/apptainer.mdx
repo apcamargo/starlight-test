@@ -2,8 +2,9 @@
 title: Apptainer
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import { FileTree } from '@astrojs/starlight/components';
+import { Steps } from "@astrojs/starlight/components";
+import { FileTree } from "@astrojs/starlight/components";
+import { remarkCustomHeaderId } from "remark-custom-header-id";
 
 [Apptainer](https://apptainer.org/) is a software for creating and running containers.
 
@@ -17,7 +18,7 @@ pixi global install apptainer
 
 ## Example 1: PGAP
 
-## Example 2: InterProScan \{#interproscan\}
+## Example 2: InterProScan ||interproscan||
 
 [InterProScan](https://interproscan-docs.readthedocs.io/) is a widely used tool for annotating protein sequences. It can classify sequences into families and predict the presence of domains, repeats, and functional sites. By integrating several analysis tools, InterProScan compares input sequences against reference entries from the [InterPro](https://www.ebi.ac.uk/interpro/) consortium’s member databases, providing comprehensive functional annotations in a single run.
 
