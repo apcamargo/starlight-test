@@ -15,11 +15,15 @@ We will install Apptainer using [Pixi](https://pixi.sh/). Before proceeding, ens
 pixi global install apptainer
 ```
 
-## Example 1: InterProScan
+## Example 1: PGAP
+
+## Example 2: InterProScan
 
 [InterProScan](https://interproscan-docs.readthedocs.io/) is a widely used tool for annotating protein sequences. It can classify sequences into families and predict the presence of domains, repeats, and functional sites. By integrating several analysis tools, InterProScan compares input sequences against reference entries from the [InterPro](https://www.ebi.ac.uk/interpro/) consortium’s member databases, providing comprehensive functional annotations in a single run.
 
-That said, installing InterProScan can be challenging due to its many dependencies, and recent versions are no longer available through Bioconda. Because of this, running it inside a container is a practical way to avoid installation issues and keep everything self-contained. This guide walks you through running InterProScan (version 5.75-106.0) locally with Apptainer, making it easier to set up and use.
+That said, installing InterProScan can be challenging due to its many dependencies, and recent versions are no longer available through Bioconda. A practical solution is to run it inside a container, which makes the installation process much easier and keeps the environment self‑contained.
+
+This guide explains how to run InterProScan version 5.75‑106.0 locally using Apptainer and use it to annotate the proteome of [*Promethearchaeum syntrophicum*](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/2594042/).
 
 <Steps>
 
@@ -41,7 +45,9 @@ That said, installing InterProScan can be challenging due to its many dependenci
     tar zxfv interproscan-data-5.75-106.0.tar.gz
     ```
 
-4. Add the function below to your `$HOME/.bashrc` file and source it to make it available in your current shell session:
+4. To simplify running InterProScan, we'll define a wrapper function named `interproscan` that will let you run the tool via a simple command, skipping the full `apptainer` syntax each time.
+
+    To set it up, edit your `.bashrc` file, which is located in your home directory, as shown below:
 
     <FileTree>
 
@@ -51,8 +57,9 @@ That said, installing InterProScan can be challenging due to its many dependenci
 
     </FileTree>
 
+    Next, add the function below to the end of the file:
+
     ```diff lang="sh" title=".bashrc"
-    …
     + interproscan() {
     +     local output_dir=""
     +     local data_dir=""
@@ -60,7 +67,7 @@ That said, installing InterProScan can be challenging due to its many dependenci
     + 
     +     # If -help or --help is given, run interproscan.sh --help and exit
     +     if [[ "\$1" == "-help" || "\$1" == "--help" ]]; then
-    +         singularity --silent exec \
+    +         apptainer --silent exec \
     +             "$HOME/images/interproscan.sif" \
     +             /opt/interproscan/interproscan.sh --help
     +         return 0
@@ -127,7 +134,7 @@ That said, installing InterProScan can be challenging due to its many dependenci
     +     done
     + 
     +     # Execute interproscan with proper mounts
-    +     singularity --silent exec \
+    +     apptainer --silent exec \
     +         -B "$data_dir/data:/opt/interproscan/data" \
     +         "$HOME/images/interproscan.sif" \
     +         /opt/interproscan/interproscan.sh \
@@ -135,26 +142,32 @@ That said, installing InterProScan can be challenging due to its many dependenci
     + }
     ```
 
-5. To annotate an example proteome, first download the proteome of [*Promethearchaeum syntrophicum*](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/2594042/) from [UniProt](https://www.uniprot.org/proteomes/UP000321408):
+    Finally, source `.bashrc` to load the new function into your active shell:
+
+    ```sh
+    source $HOME/.bashrc
+    ```
+
+5. Download the proteome of *Promethearchaeum syntrophicum* from [UniProt](https://www.uniprot.org/proteomes/UP000321408):
 
     ```sh
     wcurl --output UP000321408.faa "https://rest.uniprot.org/uniprotkb/stream?format=fasta&query=%28%28proteome%3AUP000321408%29%29"
     ```
 
-4. Run InterproScan to annotate the proteins with Pfam, NCBIfam, and CDD::
+4. Run InterProScan to annotate the proteins by searching the [Pfam](https://interpro-documentation.readthedocs.io/en/latest/databases.html#pfam), [NCBIfam](https://interpro-documentation.readthedocs.io/en/latest/databases.html#ncbifam), and [CDD](https://interpro-documentation.readthedocs.io/en/latest/databases.html#cdd) databases:
 
     ```sh 
     interproscan \
-      --applications Pfam,NCBIfam,CDD --iprlookup --goterms \
-      --output-dir interproscan_annotation --data-dir interproscan-5.75-106.0 \
+      --applications Pfam,NCBIfam,CDD --iprlookup --goterms --pathways \
+      --data-dir interproscan-5.75-106.0 --output-dir interproscan_annotation \
       --cpu 16 --input UP000321408.faa
     ```
 
-    The [output files](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) containing the annotation results will be within `interproscan_annotation`.
+    The [output files](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) containing the annotation results will be saved in the  `interproscan_annotation` directory.
 
 </Steps>
 
-## Example: `samtools`
+## Example 3: Samtools
 
 ```sh
 mkdir $HOME/images
