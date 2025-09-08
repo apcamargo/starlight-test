@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import remarkCustomHeaderId from "remark-custom-header-id";
 import starlight from "@astrojs/starlight";
 import mermaid from "astro-mermaid";
 
@@ -10,7 +10,7 @@ export default defineConfig({
   base: "/starlight-test",
   markdown: {
     rehypePlugins: [
-      rehypeHeadingIds
+      remarkCustomHeaderId,
     ],
   },
   integrations: [
