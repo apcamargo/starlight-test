@@ -68,7 +68,7 @@ This guide explains how to run InterProScan version 5.75‑106.0 locally using A
     +     local i=1
     + 
     +     # If -help or --help is given, run interproscan.sh --help and exit
-    +     if [[ "\$1" == "-help" || "\$1" == "--help" ]]; then
+    +     if [[ "$1" == "-help" || "$1" == "--help" ]]; then
     +         apptainer --silent exec \
     +             "$HOME/images/interproscan.sif" \
     +             /opt/interproscan/interproscan.sh --help
