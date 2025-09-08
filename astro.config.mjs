@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import starlight from "@astrojs/starlight";
 import mermaid from "astro-mermaid";
 
@@ -7,6 +8,11 @@ import mermaid from "astro-mermaid";
 export default defineConfig({
   site: "https://apcamargo.github.io",
   base: "/starlight-test",
+  markdown: {
+    rehypePlugins: [
+      rehypeHeadingIds
+    ],
+  },
   integrations: [
     mermaid(),
     starlight({
