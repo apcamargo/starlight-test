@@ -156,16 +156,16 @@ This guide explains how to run InterProScan version 5.75‑106.0 locally using A
     wcurl --output UP000321408.faa "https://rest.uniprot.org/uniprotkb/stream?format=fasta&query=%28%28proteome%3AUP000321408%29%29"
     ```
 
-4. Run InterProScan to annotate the proteins by searching the [Pfam](https://interpro-documentation.readthedocs.io/en/latest/databases.html#pfam), [NCBIfam](https://interpro-documentation.readthedocs.io/en/latest/databases.html#ncbifam), and [CDD](https://interpro-documentation.readthedocs.io/en/latest/databases.html#cdd) databases:
+4. Run InterProScan to annotate the proteins by searching the [Pfam](https://interpro-documentation.readthedocs.io/en/latest/databases.html#pfam), [NCBIfam](https://interpro-documentation.readthedocs.io/en/latest/databases.html#ncbifam), [CDD](https://interpro-documentation.readthedocs.io/en/latest/databases.html#cdd), and [HAMAP](https://interpro-documentation.readthedocs.io/en/latest/databases.html#hamap) databases:
 
     ```sh 
     interproscan \
-      --applications Pfam,NCBIfam,CDD --iprlookup --goterms --pathways \
+      --applications Pfam,NCBIfam,CDD,HAMAP --iprlookup --goterms --pathways \
       --data-dir interproscan-5.75-106.0 --output-dir UP000321408_interproscan \
       --cpu 16 --input UP000321408.faa
     ```
 
-    The [output files](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) containing the annotation results will be saved in the  `UP000321408_interproscan` directory:
+    The annotation results are generated in [multiple formats](https://interproscan-docs.readthedocs.io/en/v5/OutputFormats.html) and written to separate output files:
 
     <FileTree>
 
