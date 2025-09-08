@@ -1,18 +1,12 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import { remarkHeadingId } from "remark-custom-heading-id";
 import mermaid from "astro-mermaid";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://apcamargo.github.io",
   base: "/starlight-test",
-  markdown: {
-    rehypePlugins: [
-      remarkHeadingId,
-    ],
-  },
   integrations: [
     mermaid(),
     starlight({
