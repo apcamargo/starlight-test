@@ -27,6 +27,7 @@ export default defineConfig({
             { label: "Apptainer", slug: "guides/apptainer" },
             { label: "Linux", slug: "guides/linux" },
             { label: "Resources", slug: "guides/resources" },
+            { label: "tmux", slug: "guides/tmux" },
           ],
         },
         {
