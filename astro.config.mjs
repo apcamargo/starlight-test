@@ -30,6 +30,11 @@ export default defineConfig({
             { label: "tmux", slug: "guides/tmux" },
           ],
         },
+          label: "Tips",
+          items: [
+            { label: "Colors", slug: "guides/colors" },
+          ],
+        },
         {
           label: "Reference",
           autogenerate: { directory: "reference" },
