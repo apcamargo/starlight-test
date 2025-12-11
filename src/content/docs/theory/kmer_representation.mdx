@@ -106,7 +106,8 @@ where `b` is the 2-bit code for the new base and `mask = (1 ≪ 2k) - 1`.
 *   **Masking (`& mask`):** This zeroes out any high-order bits that have been shifted beyond the 2*k*-bit window, cleanly removing the oldest base.
 
 #### **3.1 Pseudocode for a Rolling k-mer Iterator**
-```pseudocode
+
+```
 FUNCTION RollingKmerIterator(sequence, k):
     // Initialization
     mask ← (1 << (2 * k)) - 1
@@ -157,7 +158,8 @@ DNA is double-stranded. A k-mer on the forward strand (e.g., 5'-ACG-3') implies 
 `canonical(x) = min(x, reverse_complement(x))`
 
 #### **5.1 Pseudocode for Reverse Complement**
-```pseudocode
+
+```
 FUNCTION ReverseComplement(kmer_value, k):
     rc ← 0
     temp_kmer ← kmer_value
