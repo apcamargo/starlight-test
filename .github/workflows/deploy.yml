@@ -25,6 +25,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v4
         with:
+          node-version: 20
           package-manager: pnpm@latest
           build-cmd: pnpm run build --verbose
 
