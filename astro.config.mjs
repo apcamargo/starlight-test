@@ -37,6 +37,12 @@ export default defineConfig({
           ],
         },
         {
+          label: "Theory",
+          items: [
+            { label: "k-mer representation", slug: "theory/kmer_representation" },
+          ],
+        },
+        {
           label: "Reference",
           autogenerate: { directory: "reference" },
         },
