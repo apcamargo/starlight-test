@@ -25,6 +25,16 @@ import { Steps } from "@astrojs/starlight/components";
 
 </Steps>
 
+## Updating Pixi
+
+From time to time you should update your Pixi installation. To do that, run the following command:
+
+```sh
+pixi self-update
+```
+
+This command checks whether a newer version is available and updates Pixi if one is found.
+
 ## Installing global tools
 
 Pixi allows you to install software globally, eliminating the need to create and activate environments. Since Pixi isolates each tool from the rest, you don't need to worry about potentially conflicting dependencies.
@@ -39,4 +49,10 @@ After installation, the `seqkit` command will be available to you.
 
 ```sh
 seqkit --help
+```
+
+To check for updates to your global tools and install them, run:
+
+```sh
+pixi global update
 ```
